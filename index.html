@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huella Hídrica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Logo Wawita" class="logo">
+        </header>
+        <main>
+            <div class="content-left">
+                <h1>¿Conoces cuál es la Huella Hídrica que generas?</h1>
+                <p>Calcúlala para descubrir cómo puedes ayudar al planeta.</p>
+            </div>
+            <div class="content-right">
+                <!-- Contenedor que inicialmente muestra el botón -->
+                <div id="intro-section">
+                    <p>A continuación te haremos una serie de preguntas que nos ayudarán a calcular tu Huella Hídrica.</p>
+                    <button onclick="startQuiz()">Empezar</button>
+                </div>
+
+                <!-- Cuestionario oculto al inicio -->
+                <div id="quiz-section" style="display: none;">
+                    <!-- Primera sección de preguntas -->
+                    <div id="section1">
+                        <div class="question">
+                            <h2 class="centered-label large-text">Vivienda</h2>
+                            <label class="centered-label">¿Cuántos minutos tardas en ducharte?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('shower-time')">-</button>
+                                <input type="number" id="shower-time" value="10">
+                                <button onclick="increaseValue('shower-time')">+</button>
+                            </div>
+
+                            <label class="centered-label">¿Cuántos minutos dejas abierto el caño del baño?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('bath-tap-time')">-</button>
+                                <input type="number" id="bath-tap-time" value="1">
+                                <button onclick="increaseValue('bath-tap-time')">+</button>
+                            </div>
+
+                            <div class="question">
+                                <label class="centered-label">¿Cuántos minutos dejas abierto el caño de la cocina?</label>
+                                <div class="input-group">
+                                    <button onclick="decreaseValue('kitchen-tap-time')">-</button>
+                                    <input type="number" id="kitchen-tap-time" value="1">
+                                    <button onclick="increaseValue('kitchen-tap-time')">+</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Botón para pasar a la siguiente sección -->
+                            <div class="button-group">
+                                <button id="next1" onclick="goToSection(2)">Siguiente</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Segunda sección de preguntas, oculta inicialmente -->
+                    <div id="section2" style="display:none;">
+                        <h2 class="centered-label large-text">Vivienda</h2>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántas veces usas el inodoro a la semana?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('dishwasher-times')">-</button>
+                                <input type="number" id="dishwasher-times" value="0">
+                                <button onclick="increaseValue('dishwasher-times')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántas veces lavas a mano a la semana?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('handwashing-times')">-</button>
+                                <input type="number" id="handwashing-times" value="0">
+                                <button onclick="increaseValue('handwashing-times')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántas veces usas la lavadoras a la semana?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('laundry-times')">-</button>
+                                <input type="number" id="laundry-times" value="0">
+                                <button onclick="increaseValue('laundry-times')">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Botones para retroceder y avanzar -->
+                        <div class="button-group">
+                            <button id="prev2" onclick="goToSection(1)">Anterior</button>
+                            <button id="next2" onclick="goToSection(3)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- Tercera sección de preguntas, oculta inicialmente -->
+                    <div id="section3" style="display:none;">
+                        <h2 class="centered-label large-text">Hábitos</h2>
+                        <div class="question">
+                            <label class="centered-label">¿Reciclas el papel?</label>
+                            <div class="input-group">
+                                <input type="radio" id="recycle-none" name="recycle-paper" value="No">
+                                <label for="recycle-none">No</label><br>
+                                <input type="radio" id="recycle-some" name="recycle-paper" value="Algo">
+                                <label for="recycle-some">Algo</label><br>
+                                <input type="radio" id="recycle-all" name="recycle-paper" value="Todo">
+                                <label for="recycle-all">Todo</label><br>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Reciclas Plástico?</label>
+                            <div class="input-group">
+                                <input type="radio" id="recycle-none" name="recycle-plastic" value="No">
+                                <label for="recycle-none">No</label><br>
+                                <input type="radio" id="recycle-some" name="recycle-plastic" value="Algo">
+                                <label for="recycle-some">Algo</label><br>
+                                <input type="radio" id="recycle-all" name="recycle-plastic" value="Todo">
+                                <label for="recycle-all">Todo</label><br>
+                            </div>
+                        </div>
+
+                        <!-- Botones para retroceder y avanzar -->
+                        <div class="button-group">
+                            <button id="prev3" onclick="goToSection(2)">Anterior</button>
+                            <button id="next3" onclick="goToSection(4)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- Cuarta sección de preguntas sobre coche, oculta inicialmente -->
+                    <div id="section4" style="display:none;">
+                        <h2 class="centered-label large-text">Transporte</h2>
+                        <div class="question">
+                            <label class="centered-label">¿Tienes coche?</label>
+                            <div class="input-group">
+                                <input type="radio" id="has-car-yes" name="has-car" value="Sí">
+                                <label for="has-car-yes">Sí</label><br>
+                                <input type="radio" id="has-car-no" name="has-car" value="No">
+                                <label for="has-car-no">No</label><br>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántas veces lavas tu coche al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('car-wash-times')">-</button>
+                                <input type="number" id="car-wash-times" value="0">
+                                <button onclick="increaseValue('car-wash-times')">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Botones para retroceder y avanzar -->
+                        <div class="button-group">
+                            <button id="prev4" onclick="goToSection(3)">Anterior</button>
+                            <button id="next4" onclick="goToSection(5)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- Quinta sección sobre consumo de carne, oculta inicialmente -->
+                    <div id="section5" style="display:none;">
+                        <h2 class="centered-label large-text">Alimentación</h2>
+                        
+                        <div class="question">
+                            <label class="centered-label">Indica el consumo en kilos de carne al mes</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('beef-consumption')">-</button>
+                                <input type="number" id="beef-consumption" value="0">
+                                <button onclick="increaseValue('beef-consumption')">+</button>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos kilos de pollo comes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('chicken-consumption')">-</button>
+                                <input type="number" id="chicken-consumption" value="0">
+                                <button onclick="increaseValue('chicken-consumption')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos kilos de cerdo comes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('pork-consumption')">-</button>
+                                <input type="number" id="pork-consumption" value="0">
+                                <button onclick="increaseValue('pork-consumption')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos kilos de cordero comes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('lamb-consumption')">-</button>
+                                <input type="number" id="lamb-consumption" value="0">
+                                <button onclick="increaseValue('lamb-consumption')">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Botones para retroceder y avanzar -->
+                        <div class="button-group">
+                            <button id="prev5" onclick="goToSection(4)">Anterior</button>
+                            <button id="next5" onclick="goToSection(6)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- Sexta sección sobre vegetales, legumbres y tubérculos, oculta inicialmente -->
+                    <div id="section6" style="display:none;">
+                        <h2 class="centered-label large-text">Habitos</h2>
+
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos kilos de vegetales consumes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('vegetables-consumption')">-</button>
+                                <input type="number" id="vegetables-consumption" value="0">
+                                <button onclick="increaseValue('vegetables-consumption')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos kilos de legumbres consumes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('legumes-consumption')">-</button>
+                                <input type="number" id="legumes-consumption" value="0">
+                                <button onclick="increaseValue('legumes-consumption')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos kilos de tubérculos consumes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('tubers-consumption')">-</button>
+                                <input type="number" id="tubers-consumption" value="0">
+                                <button onclick="increaseValue('tubers-consumption')">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Botones para retroceder y avanzar -->
+                        <div class="button-group">
+                            <button id="prev6" onclick="goToSection(5)">Anterior</button>
+                            <button id="next6" onclick="goToSection(7)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <!-- Séptima sección sobre consumo de bebidas, oculta inicialmente -->
+                    <div id="section7" style="display:none;">
+                        <h2 class="centered-label large-text">Habitos</h2>
+                        
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos litros de lácteos consumes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('dairy-consumption')">-</button>
+                                <input type="number" id="dairy-consumption" value="0">
+                                <button onclick="increaseValue('dairy-consumption')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos litros de bebidas gasificadas consumes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('soft-drinks-consumption')">-</button>
+                                <input type="number" id="soft-drinks-consumption" value="0">
+                                <button onclick="increaseValue('soft-drinks-consumption')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos litros de bebidas energéticas consumes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('energy-drinks-consumption')">-</button>
+                                <input type="number" id="energy-drinks-consumption" value="0">
+                                <button onclick="increaseValue('energy-drinks-consumption')">+</button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label class="centered-label">¿Cuántos litros de bebidas alcohólicas consumes al mes?</label>
+                            <div class="input-group">
+                                <button onclick="decreaseValue('alcohol-consumption')">-</button>
+                                <input type="number" id="alcohol-consumption" value="0">
+                                <button onclick="increaseValue('alcohol-consumption')">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Botones para retroceder y calcular la Huella Hídrica -->
+                        <div class="button-group">
+                            <button id="prev7" onclick="goToSection(6)">Anterior</button>
+                            <button id="next7" onclick="calculateFootprint()">Calcular</button>
+
+                        </div>
+                        <div id="result-section" style="display: none;">
+                            <h2>Resultado</h2>
+                            <p id="result-message"></p>
+                        </div>
+                        
+                    </div>
+
+                    <div id="section8" style="display:none;">
+                        <h2 class="centered-label large-text">Resultado</h2>
+                        <div class="question">
+                            <label class="centered-label">¿Tienes coche?</label>
+                            <div class="input-group">
+                                <input type="radio" id="has-car-yes" name="has-car" value="Sí">
+                                <label for="has-car-yes">Sí</label><br>
+                                <input type="radio" id="has-car-no" name="has-car" value="No">
+                                <label for="has-car-no">No</label><br>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                 
+                
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
